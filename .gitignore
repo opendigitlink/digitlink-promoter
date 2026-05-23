@@ -1,0 +1,44 @@
+# Git ignore for DigitLink Promoter Distribution
+
+# Environment files (contain secrets)
+.env
+.env.local
+.env.production
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Cache
+__pycache__/
+*.pyc
+.cache/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Local state (per-machine)
+memories/
+sessions/
+state.db*
+logs/
+workspace/
+audio_cache/
+image_cache/
+
+# Skip these even in distribution testing
+auth.json
+*.lock
+pairing/

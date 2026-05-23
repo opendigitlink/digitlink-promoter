@@ -1,0 +1,53 @@
+# DigitLink推广Agent分发配置
+# 一键分发整个推广Agent到任何机器
+
+name: digitlink-promoter
+version: 1.0.0
+description: "DigitLink.mobi AI推广Agent - 社交媒体涨粉引流专家，支持TikTok/Instagram/Facebook多平台运营"
+
+hermes_requires: ">=0.14.0"
+author: "DigitLink Team"
+license: "MIT"
+homepage: "https://digitlink.mobi"
+
+# 需要的环境变量（用户需要自己填）
+env_requires:
+  - name: OPENAI_API_KEY
+    description: "OpenAI API Key（用于GPT模型）"
+    required: false
+    default: ""
+
+  - name: TELEGRAM_BOT_TOKEN
+    description: "Telegram Bot Token（用于接收任务通知）"
+    required: false
+    default: ""
+
+  - name: DIGITLINK_EMAIL
+    description: "DigitLink账号邮箱"
+    required: true
+    default: ""
+
+  - name: DIGITLINK_PASSWORD
+    description: "DigitLink账号密码"
+    required: true
+    default: ""
+
+# 包含的组件
+includes:
+  soul: true        # SOUL.md - 人格配置
+  config: true      # config.yaml - 模型/工具配置
+  skills: true      # skills/ - 技能包
+  cron: true        # cron/ - 定时任务
+  mcp: false        # MCP服务器（暂不包含）
+
+# 技能列表
+skills:
+  - name: digitlink-promotion
+    description: "DigitLink推广核心技能包"
+    version: "1.0.0"
+  - name: digitlink-social-assistant
+    description: "社交平台内容发布与互动"
+    version: "1.0.0"
+  - name: comment-auto-reply
+    description: "评论自动回复"
+    version: "1.0.0"

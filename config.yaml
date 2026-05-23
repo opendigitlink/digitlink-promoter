@@ -1,0 +1,68 @@
+# DigitLink推广Agent配置
+# 模型和工具配置
+
+model:
+  default: openai/gpt-4o-mini
+  provider: openrouter
+  base_url: https://openrouter.ai/api/v1
+  reasoning_effort: high
+
+providers:
+  openrouter:
+    api_key: ${OPENROUTER_API_KEY}
+
+fallback_providers:
+  - minimax-cn
+
+toolsets:
+  - hermes-cli
+  - terminal
+  - web
+  - browser
+
+agent:
+  max_turns: 150
+  gateway_timeout: 1800
+  restart_drain_timeout: 60
+  api_max_retries: 3
+  tool_use_enforcement: auto
+  gateway_timeout_warning: 900
+  gateway_notify_interval: 180
+  image_input_mode: auto
+  verbose: false
+  reasoning_effort: high
+
+terminal:
+  backend: local
+  modal_mode: auto
+  cwd: .
+  timeout: 180
+  env_passthrough:
+    - OPENROUTER_API_KEY
+    - DIGITLINK_EMAIL
+    - DIGITLINK_PASSWORD
+  auto_source_bashrc: true
+
+# 定时任务配置
+cron:
+  enabled: true
+  timezone: America/New_York  # 美国东部时区
+
+# 浏览器自动化配置
+browser:
+  headless: true
+  user_agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+  viewport:
+    width: 1280
+    height: 720
+
+# 推广平台配置
+promotion:
+  platforms:
+    - tiktok
+    - instagram
+    - facebook
+  target_market: US
+  posting_schedule:
+    weekdays: ["18:00", "19:00", "20:00", "21:00"]
+    weekends: ["10:00", "11:00", "14:00", "15:00"]
