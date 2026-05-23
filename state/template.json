@@ -1,0 +1,36 @@
+{
+  "task_id": "competitor_watch_2026-05-24_001",
+  "task_type": "competitor_watch",
+  "description": "每日竞品监控任务",
+  "status": "pending",
+  "schedule": "0 8 * * *",
+  "started_at": null,
+  "updated_at": null,
+  "completed_at": null,
+  "attempt_count": 0,
+  "max_attempts": 3,
+  "evidence": {
+    "files_written": [],
+    "metrics": {}
+  },
+  "handoff": {
+    "next_action": null,
+    "blocking_issues": []
+  },
+  "diagnostic": {
+    "saw_rules": null,
+    "had_tools": null,
+    "had_env": null,
+    "had_state": null,
+    "had_feedback": null,
+    "clean_exit": null
+  },
+  "verification": {
+    "type": "competitor_watch",
+    "command": "test -f data/competitors_{date}.json && wc -l data/competitors_{date}.json",
+    "condition": "lines > 10",
+    "passed": null,
+    "error": null
+  },
+  "error_log": []
+}

@@ -1,44 +1,39 @@
-# Git ignore for DigitLink Promoter Distribution
+# Dependencies
+node_modules/
 
-# Environment files (contain secrets)
+# Environment
 .env
 .env.local
-.env.production
 
-# OS files
+# State files (generated at runtime)
+state/**/*.json
+!state/template.json
+
+# Evidence (generated at runtime)
+evidence/**/*.png
+evidence/**/*.html
+evidence/**/*.json
+!evidence/.gitkeep
+
+# Data (generated at runtime)
+data/**/*.json
+!data/.gitkeep
+
+# Logs (generated at runtime)
+logs/*.log
+
+# Reports (generated at runtime)
+reports/**/*.md
+!reports/.gitkeep
+
+# macOS
 .DS_Store
-Thumbs.db
 
-# Logs
-*.log
-logs/
-
-# Cache
-__pycache__/
-*.pyc
-.cache/
-
-# Temporary files
-tmp/
-temp/
-*.tmp
-
-# IDE
+# Editor
 .vscode/
 .idea/
 *.swp
 *.swo
 
-# Local state (per-machine)
-memories/
-sessions/
-state.db*
-logs/
-workspace/
-audio_cache/
-image_cache/
-
-# Skip these even in distribution testing
-auth.json
-*.lock
-pairing/
+# Git
+.git/objects/

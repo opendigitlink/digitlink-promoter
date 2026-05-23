@@ -1,16 +1,16 @@
-# DigitLink推广Agent分发配置
-# 一键分发整个推广Agent到任何机器
+# DigitLink推广Agent分发配置 v2.0
+# 基于Harness Engineering原则 - 渐进披露 + 状态外部化 + 完成验证
 
 name: digitlink-promoter
-version: 1.0.0
-description: "DigitLink.mobi AI推广Agent - 社交媒体涨粉引流专家，支持TikTok/Instagram/Facebook多平台运营"
+version: 2.0.0
+description: "DigitLink.mobi AI推广Agent - 社交媒体涨粉引流专家，支持TikTok/Instagram/Facebook多平台运营，基于Harness Engineering工程化方法论"
 
 hermes_requires: ">=0.14.0"
 author: "DigitLink Team"
 license: "MIT"
 homepage: "https://digitlink.mobi"
 
-# 需要的环境变量（用户需要自己填）
+# 需要的环境变量
 env_requires:
   - name: OPENAI_API_KEY
     description: "OpenAI API Key（用于GPT模型）"
@@ -32,13 +32,65 @@ env_requires:
     required: true
     default: ""
 
-# 包含的组件
+# 包含的组件（v2.0 增强）
 includes:
-  soul: true        # SOUL.md - 人格配置
-  config: true      # config.yaml - 模型/工具配置
-  skills: true      # skills/ - 技能包
-  cron: true        # cron/ - 定时任务
-  mcp: false        # MCP服务器（暂不包含）
+  soul: true           # soul/ - 渐进披露的指令系统
+  config: true         # config.yaml - 模型/工具配置
+  skills: true         # skills/ - 技能包
+  cron: true          # cron/tasks.yaml - 定时任务（带状态追踪）
+  state: true         # state/ - 任务状态外部化
+  verification: true   # verification/ - 完成验证机制
+  evidence: true      # evidence/ - 证据存储
+  data: true          # data/ - 竞品数据存储
+  logs: true          # logs/ - 操作日志
+  reports: true       # reports/ - 报告输出
+
+# SOUL.md 渐进披露结构
+soul_structure:
+  entry: "soul/00-core.md"
+  modules:
+    - id: 1
+      file: "soul/01-skills.md"
+      description: "技能规范 - 运营/文案/数据分析"
+    - id: 2
+      file: "soul/02-platform-rules.md"
+      description: "平台规则 - TikTok/IG/FB规范 + 安全约束"
+
+# 状态管理（State Externalization）
+state_management:
+  enabled: true
+  path: "state/{task_type}/{YYYY-MM-DD}.json"
+  template: "state/template.json"
+  manager_script: "state/state_manager.sh"
+  required_fields:
+    - task_id
+    - status
+    - started_at
+    - updated_at
+    - completed_at
+    - evidence
+    - diagnostic
+
+# 验证机制（Verification）
+verification:
+  enabled: true
+  rules_file: "verification/README.md"
+  evidence_path: "evidence/{task_type}/{task_id}/"
+  completion_criteria:
+    - 构建完成
+    - 验证通过
+    - 证据存在
+    - 交接写入
+    - 清洁退出
+
+# 诊断6问（Diagnostic 6）
+diagnostic_questions:
+  - "saw_rules: Agent是否看到了规则？"
+  - "had_tools: Agent是否有可执行工具？"
+  - "had_env: Agent是否有可复现环境？"
+  - "had_state: Agent是否有持续状态？"
+  - "had_feedback: Agent是否有验证反馈？"
+  - "clean_exit: Agent是否清洁退出？"
 
 # 技能列表
 skills:
@@ -51,3 +103,14 @@ skills:
   - name: comment-auto-reply
     description: "评论自动回复"
     version: "1.0.0"
+
+# 更新日志
+changelog:
+  v2.0.0:
+    - "基于Harness Engineering重构"
+    - "SOUL.md拆分为渐进披露结构"
+    - "增加状态外部化系统"
+    - "增加完成验证机制"
+    - "增加证据存储系统"
+  v1.0.0:
+    - "初始版本"
